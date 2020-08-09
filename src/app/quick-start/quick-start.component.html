@@ -1,1 +1,111 @@
-<p>quick-start works!</p>
+<h1>Quick start guide</h1>
+
+<h2>1. Installation</h2>
+
+<p>
+// TODO: provide linux/mac packages (aur, homebrew) and windows binaries
+</p>
+<br>
+
+<h2>2. Compiling from Source</h2>
+<h3>2.0. Prerequisites</h3>
+<p>
+memflow is written entirely in <a href="https://www.rust-lang.org/">Rust</a>.
+It is therefor required to have a Rust toolchain installed.
+memflow is verified to compile on the stable toolchain of Rust 1.45.1.
+</p>
+
+<p>
+More information on how to install Rust can be obtained from the <a href="https://rustup.rs/">rustup project website</a>.
+</p>
+<br>
+
+<h3>2.1. Linux</h3>
+<p>
+memflow acquires physical memory via a so-called connector.
+By default, a tool written using memflow will use the plugin inventory system
+which will manage all available connectors internally.
+</p>
+
+<p>
+To get started with the plugin inventory you need to have at least one connector installed.
+By default memflow will search all folders in $PATH for a sub-folder named memflow.
+All libraries the inventory finds in these sub-folders are then provided to the user.
+</p>
+
+<p>
+To install one of the connectors simply clone the repository
+and run the installation script:
+</p>
+
+<div class="code">
+    <div class="code-inner">
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ git clone https://github.com/memflow/memflow-coredump</span></div>
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ cd memflow-coredump</span></div>
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ ./install --system</span></div>
+    </div>
+</div>
+
+<p>
+When invoking the install script with the <span class="code-inline">--system</span> parameter<br>
+the connector is installed in the <span class="code-inline">/usr/local/lib/memflow/</span> folder.<br>
+If no flag is specified the connector will be installed in the <span class="code-inline">$HOME/.local/lib/memflow</span> directory.<br>
+In case those paths are not in your <span class="code-inline">$PATH</span> variable please make sure to add them.
+</p>
+
+<p>
+To install the command-line interface (CLI) simply clone the repository and compile it via cargo:
+</p>
+
+<div class="code">
+    <div class="code-inner">
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ git clone https://github.com/memflow/memflow-cli</span></div>
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ cd memflow-cli</span></div>
+        <div style="color: #d4d4d4;background-color: #1e1e1e;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 14px;line-height: 19px;white-space: pre;"><span style="color: #d4d4d4;">$ cargo build --release --all-features</span></div>
+    </div>
+</div>
+
+<p>
+This builds the system daemon as well as the client interface for the cli.<br>
+The resulting binaries can now be found in the <span class="code-inline">/target/release/</span> folder.<br>
+</p>
+
+<p>
+// TODO: explain how to manually setup the daemon on linux
+</p>
+<br>
+
+<h3>2.2. Windows</h3>
+
+<p>
+// TODO: write windows compile guide
+</p>
+<br>
+
+<h3>2.3. Mac OS</h3>
+
+<p>
+// TODO: write mac compile guide
+</p>
+<br>
+
+<h2>3. Running in Docker</h2>
+
+<p>
+// TODO: implement + describe docker setup
+</p>
+<br>
+
+<h2>4. The command-line interface</h2>
+
+<p>
+// TODO: show cli usage
+</p>
+<br>
+
+<h2>5. Working with the library</h2>
+
+<p>
+// TODO: write and explain examples
+</p>
+<br>
