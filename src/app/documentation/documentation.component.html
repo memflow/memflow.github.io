@@ -50,8 +50,12 @@ This reader is then being used to find a valid PE header for the “ntoskrnl.exe
 <h4>3. Finding the GUID and WinVersion of the ntoskrnl.exe</h4>
 <p>
 Microsoft provides program databases (PDBs) for all of their released Windows kernels.<br>
-This is usually used in conjunction with WinDbg to analyze or debug a system directly.<br>
-memflow has a built-in feature that downloads and loads those PDB files
+These PDB files contain all information required for debugging a program.<br>
+They are usually used in conjunction with WinDbg to analyze or debug a system directly.
+</p>
+<p>
+We are mostly interested in struct member offsets that are contained in those PDBs.<br>
+For this purpose memflow has a built-in feature that downloads and loads those PDB files
 to find the appropiate offsets for the current windows installation.<br>
 It is mandatory to acquire the GUID of the ntoskrnl.exe to acquire the proper PDB.
 </p>
