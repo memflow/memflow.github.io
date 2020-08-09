@@ -1,18 +1,30 @@
 @import '~src/styles.sass'
 
+.banner
+    img
+        position: absolute
+        top: 0
+        right: 0
+        border: 0
+        z-index: 100
+        @media all and (max-width: 480px)
+            display: none
+
 .header
     color: $color2
     font-weight: 700
     width: fit-content
     margin-left: auto
     margin-right: auto
+    @media all and (max-width: 480px)
+        font-size: 9px
 
 .content
-    padding-top: 5em
-    padding-bottom: 5em
     width: 50%
-    margin-left: auto
-    margin-right: auto
+    min-width: 480px
+    @media all and (max-width: 480px)
+        width: 100%
+        min-width: 100%
 
 app-navigation
     display: block
