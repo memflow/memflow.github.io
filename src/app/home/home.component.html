@@ -1,15 +1,56 @@
 <div class="content">
-    <div class="badges" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="0.5em"> 
-        <a href=""><img alt="Build and test" src="https://github.com/memflow/memflow/workflows/Build%20and%20test/badge.svg?branch=master"></a>
-        <a href="https://codecov.io/gh/memflow/memflow"><img alt="Codecov" src="https://codecov.io/gh/memflow/memflow/branch/master/graph/badge.svg?token=XT7R158N6W"></a>
-        <a href="https://discord.gg/afsEtMR"><img alt="Discord" src="https://img.shields.io/discord/738739624976973835?color=%20%237289da&label=Discord"></a>
+    <h1>memflow - machine introspection framework</h1>
+
+    <div class="badges" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="0.5em">
+        <a href="https://crates.io/crates/memflow">
+            <img alt="Crates.io" src="https://img.shields.io/crates/v/memflow.svg">
+        </a>
+        <a href="https://github.com/memflow/memflow/actions">
+            <img alt="Build and test"
+                src="https://github.com/memflow/memflow/workflows/Build%20and%20test/badge.svg?branch=master">
+        </a>
+        <a href="https://codecov.io/gh/memflow/memflow">
+            <img alt="Codecov"
+                src="https://codecov.io/gh/memflow/memflow/branch/master/graph/badge.svg?token=XT7R158N6W">
+        </a>
+        <a href="https://github.com/memflow/memflow/blob/master/LICENSE">
+            <img alt="MIT licensed" src="https://img.shields.io/badge/license-MIT-blue.svg">
+        </a>
+        <a href="https://discord.gg/afsEtMR">
+            <img alt="Discord" src="https://img.shields.io/discord/738739624976973835?color=%20%237289da&label=Discord">
+        </a>
     </div>
 
     <div class="text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus justo metus, vitae cursus sapien congue non. Aenean rhoncus leo ut blandit cursus. In facilisis tellus enim, vitae porttitor sapien volutpat et. Maecenas laoreet risus nec consectetur consectetur. Donec semper ex eget nulla sagittis sagittis. Donec ac commodo augue. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-        In iaculis lorem quis leo auctor, aliquam condimentum tellus semper. Quisque mattis ultricies vestibulum. In feugiat, odio non posuere placerat, velit tortor varius nisl, vehicula vehicula lectus odio eget eros. Proin vitae faucibus neque. Phasellus consequat aliquet nisl a condimentum. Ut quis hendrerit est, vel faucibus eros. In eget ex ac ex condimentum venenatis vel ac leo.
-        Morbi tristique nibh dui, in placerat orci sagittis sit amet. Pellentesque eu sem at elit tincidunt lobortis. Quisque quis cursus massa. Aliquam tincidunt ut purus nec consectetur. Aliquam velit lectus, tristique eget faucibus tempor, ultrices eget est. Sed posuere, orci sed dictum malesuada, justo lacus condimentum ex, vel vulputate dolor purus at velit. Sed purus metus, maximus ut leo in, consequat consequat lorem. Pellentesque at lacus maximus, venenatis magna at, viverra nulla. Nullam consequat finibus orci, quis rhoncus urna aliquam non. Curabitur eleifend elit feugiat, vestibulum mauris vel, blandit quam. Maecenas placerat tellus sed bibendum posuere. Fusce malesuada a enim sed tincidunt. Phasellus eleifend et nisl dictum sollicitudin. Praesent accumsan congue libero eget vehicula.
-        Suspendisse sed felis lacus. Donec dui mi, tincidunt nec tincidunt id, fermentum vel metus. Curabitur porttitor ultrices venenatis. Fusce fringilla libero erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam et ex eget turpis euismod blandit et id arcu. Etiam vulputate orci a tristique rhoncus. Phasellus ornare viverra tincidunt. Aenean ac ultricies risus. Suspendisse mattis ac felis nec imperdiet. In commodo lectus mi, non consequat enim gravida non.
-        Donec sed felis magna. Donec congue, metus vitae elementum ultrices, purus risus lobortis nibh, vel sagittis augue mi id urna. Nulla facilisi. Aliquam dapibus ante leo, scelerisque blandit sem viverra vitae. In molestie venenatis dolor, non facilisis nulla lacinia id. Praesent viverra mollis nunc eget imperdiet. Duis non porttitor nibh, non malesuada lacus. In at bibendum libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur dui turpis, volutpat dignissim urna et, sodales imperdiet risus.
-     </div>
+        <p>
+            memflow is a library that allows live memory introspection of running systems and their snapshots.
+            Due to its modular approach it trivial to support almost any scenario where Direct Memory Access is
+            available.
+        </p>
+        <p>
+            The very core of the library is a
+            <a href="https://docs.rs/memflow/latest/memflow/mem/phys_mem/trait.PhysicalMemory.html">PhysicalMemory</a>
+            that
+            provides direct memory access in an abstract environment.
+            This object that can be defined both statically, and dynamically with the use of the `inventory` feature.
+            If `inventory` is enabled, it is possible to dynamically load libraries that provide Direct Memory Access.
+        </p>
+        <p>
+            Through the use of OS abstraction layers, like <a
+                href="https://github.com/memflow/memflow/tree/master/memflow-win32">memflow-win32</a>,
+            user can gain access to virtual memory of individual processes, by creating objects that implement
+            <a href="https://docs.rs/memflow/latest/memflow/mem/virt_mem/trait.VirtualMemory.html">VirtualMemory</a>.
+        </p>
+        <p>
+            Bridging the two is done by a highly throughput optimized virtual address translation function, which allows
+            for crazy fast memory transfers at scale.
+        </p>
+        <p>
+            The core is architecture independent (as long as addresses fit in 64-bits), and currently both 32, and
+            64-bit versions of the x86 family are available to be used.
+        </p>
+        <p> For non-rust libraries, it is possible to use the <a
+                href="https://github.com/memflow/memflow/tree/master/memflow-ffi">FFI</a> to interface with the library.
+        </p>
+    </div>
 </div>
