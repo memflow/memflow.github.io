@@ -85,6 +85,25 @@ h4
     background-color: #1e1e1e
     .code-inner
         padding: 7px
+        overflow: scroll
+        overflow-x: auto
+        overflow-y: hidden
+        srollbar-color: rgba(70, 70, 70, 0.5) rgb(20, 20, 20)
+        span
+            color: #d4d4d4
+            background-color: #1e1e1e
+            font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'
+            font-weight: normal
+            font-size: 14px
+            line-height: 19px
+            white-space: pre
+    .code-inner::-webkit-scrollbar
+        width: 15px
+        height: 15px
+    .code-inner::-webkit-scrollbar-thumb
+        background: rgba(70, 70, 70, 0.5)
+    .code-inner::-webkit-scrollbar-track
+        background: rgb(20, 20, 20)
 
 .code-inline
     white-space: nowrap
