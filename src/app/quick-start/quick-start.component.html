@@ -15,88 +15,153 @@ Currently, only source installation is available, so please follow the next sect
 <h2>2. Compiling from Source</h2>
 <h3>2.0. Prerequisites</h3>
 <p>
-memflow is written entirely in <a href="https://www.rust-lang.org/">Rust</a>.
+Memflow is written entirely in <a href="https://www.rust-lang.org/">Rust</a>.
 It is therefore required to have a Rust toolchain installed.
-memflow is verified to compile on the stable toolchain of Rust 1.45.1.
+Memflow is verified to compile on the stable toolchain of Rust 1.51.0.
 </p>
 
 <p>
 More information on how to install Rust can be obtained from the <a href="https://rustup.rs/">rustup project website</a>.
 </p>
+
 <br>
 
 <h3>2.1. Connectors</h3>
 
 <p>
-Recommended way to manage multiple connectors is through the <a href="https://github.com/memflow/memflowup">memflowup</a> utility. It requires <a href="https://www.python.org/">Python 3</a>.
+Connectors play an integral role in the memflow ecosystem.
+They are responsible for providing the necessary functionality to communicate with a specific target.
+For example to connect to a qemu target the <a href="https://github.com/memflow/memflow-qemu">memflow-qemu</a> connector is required.
 </p>
 
-<h3>2.1.1. Linux / macOS in one line</h3>
+<h3>2.1.1 memflowup</h3>
+
+<p>
+The recommended way to manage multiple connectors is through the <a href="https://github.com/memflow/memflowup">memflowup</a> utility.
+It is a small utility that allows rapid installation and updating of official connectors.
+</p>
+
+<h3>Installation</h3>
+
+<p>The recommended way to install memflowup is through the automated shell script:</p>
 
 <div class="code">
 	<div class="code-inner">
-		<span>$ curl -L https://raw.githubusercontent.com/memflow/memflowup/master/memflowup.py | python3</span>
+		<span>$ curl --proto '=https' --tlsv1.2 -sSf https://sh.memflow.io | sh</span>
 	</div>
 </div>
 
-<h3>2.1.2. With Git</h3>
+<p>Alternatively you can manually install it via cargo as well:</p>
 
-<p>Clone and run the script:</p>
+<h3>Usage</h3>
+
+<p>A list of available command can be obtained by running:</p>
 
 <div class="code">
 	<div class="code-inner">
-		<div><span>$ git clone https://github.com/memflow/memflowup.git</span></div>
-		<div><span>$ cd memflowup</span></div>
-		<div><span>$ python3 memflowup.py</span></div>
+		<span>$ memflowup --help</span>
 	</div>
 </div>
 
-<p>Update installed connectors:</p>
+<p>To receive a guided installation of connectors run:</p>
 
 <div class="code">
 	<div class="code-inner">
-		<div><span>$ python3 memflowup.py update</span></div>
+		<span>$ memflowup interactive</span>
 	</div>
 </div>
+
+<p>More detailed usage instructions can be found on the <a href="https://github.com/memflow/memflowup">memflowup</a> Github page</p>
+
+<h3>2.1.2. Manually using connectors</h3>
+
+<p>// TODO: Add instructions regarding the using of cargo to use connectors</p>
 
 <br>
 
-<h3>2.2. CLI</h3>
+<h3>2.2. Cloudflow - A pluggable framework and UI for memflow</h3>
 
-<h3>2.2.1 Client</h3>
+<p>
+	Cloudflow aims to be an extensible framework for memflow applications.
+	The project is currently in its infancy, but it already has the following features:
+</p>
 
-<p>Install the client:</p>
+<ul>
+	<li>FUSE interface</li>
+	<li>Full connector / OS chaining</li>
+	<li>Process information</li>
+	<li>Standalone minidump generator</li>
+</ul>
 
-<div class="code">
-	<div class="code-inner">
-		<div><span>$ cargo install --git https://github.com/memflow/memflow-cli/ memflow-cli</span></div>
-	</div>
-</div>
+<h3>Prerequisites</h3>
 
-<p>(If running local daemon) By default, memflow socket is only accessible to the memflow group, create it, and add your user:</p>
+<p>
+	Cloudflow depends on the <a href="https://github.com/zargony/fuse-rs">Rust FUSE</a> package which depends on the FUSE development tools.
+    Please check their repositry for detailed installation instructions for your platform.
+</p>
 
-<div class="code">
-	<div class="code-inner">
-		<div><span>$ sudo groupadd memflow</span></div>
-		<div><span>$ sudo usermod -aG memflow (username)</span></div>
-	</div>
-</div>
+<h3>Installation</h3>
 
-<p>You will need to logout for the group changes to be applied</p>
-
-<h3>2.2.2 Daemon</h3>
-
-<p>Daemon is currently only supported on Unix systems.</p>
-
-<p>Install the daemon and create initial config:</p>
+<p>Currently cloudflow can only be built from source. This can be done using the following command:</p>
 
 <div class="code">
 	<div class="code-inner">
-		<div><span>$ cargo install --git https://github.com/memflow/memflow-cli/ memflow-daemon</span></div>
-		<div><span>$ sudo mkdir -p /etc/memflow/</span></div>
-		<div><span>$ curl -L https://raw.githubusercontent.com/memflow/memflow-cli/master/daemon.conf | sudo tee /etc/memflow/daemon.conf</span></div>
+		<div><span>$ cargo install cloudflow-node --git https://github.com/memflow/cloudflow</span></div>
 	</div>
 </div>
+
+<h3>Usage</h3>
+
+<p>To run an elevated instance with FUSE use the following command:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<span>$ cloudflow -ef</span>
+	</div>
+</div>
+
+<p>You should be able to see the following messages:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<div><span>Mounting FUSE filesystem on /cloudflow</span></div>
+		<div><span>Initialized!</span></div>
+	</div>
+</div>
+
+<p>To create a new connector instance to the first QEMU VM instance on your system:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<span>$ echo "my_qemu_vm qemu" >> /cloudflow/connector/new</span>
+	</div>
+</div>
+
+<p>Or alternatively connect to a specific VM e.g 'my-qemu-vm', you can pass an argument to the connector:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<span>$ echo "my_qemu_vm qemu:my-qemu-vm" >> /cloudflow/connector/new</span>
+	</div>
+</div>
+
+<p>From here you can create a new OS instance on top of the QEMU connector like so:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<span>$ echo "win -c my_qemu_vm win32" >> /cloudflow/os/new</span>
+	</div>
+</div>
+
+<p>Optionally you can specify arguments to this connector aswell, for example the architecture:</p>
+
+<div class="code">
+	<div class="code-inner">
+		<span>$ echo "win -c my_qemu_vm win32::arch=x64" >> /cloudflow/os/new</span>
+	</div>
+</div>
+
+<p>Full usage instructions can be found on the <a href="https://github.com/memflow/cloudflow">cloudflow</a> Github page</p>
 
 <br>
 
