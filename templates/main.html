@@ -5,7 +5,7 @@
     <title>memflow project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="/styles.css"></head>
+	<link rel="stylesheet" href="{{ backlink }}styles.css"></head>
 </head>
 <body>
     <div class="root">
@@ -18,7 +18,7 @@
 /_/ /_/ /_/\___/_/ /_/ /_/_/ /_/\____/|__/|__/</pre>
             <ul class="navbar">
                 {% for link, title in navbar %}
-                <a href={{ link }}>{{ title }}</a>
+				<a href={{backlink}}{{ link }}>{{ title }}</a>
                 {%- if not loop.last %}
                 <pre> | </pre>
                 {% endif %}

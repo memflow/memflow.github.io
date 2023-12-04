@@ -15,10 +15,10 @@ template = env.get_template('main.html')
 # Define custom variables passed over to the templates
 template_vars = {
     'navbar': [
-        ('/', 'Home'),
-        ('/about', 'About'),
-        ('/quick_start', 'Quick start guide'),
-        ('/docs', 'Documentation'),
+        ('', 'Home'),
+        ('about', 'About'),
+        ('quick_start', 'Quick start guide'),
+        ('docs', 'Documentation'),
     ]
 }
 
@@ -50,6 +50,17 @@ for f in glob.glob(os.path.join(src_dir, '**'), recursive=True):
                 pre += '/index'
             of = pre + ".html"
             os.makedirs(os.path.dirname(of), exist_ok=True)
+
+            # Build a backlink to root
+            offset2 = of[len(out_dir):]
+            if offset2.startswith('/'):
+                offset2 = offset2[1:]
+            backlink = ''
+            for i in range(1,len(offset2.split("/"))):
+                backlink += '../'
+
+            template_vars['backlink'] = backlink
+
             content = str.encode(template.render(template_vars, content=content.decode('utf-8')))
         elif ext == '.scss':
             of = pre + ".css"
