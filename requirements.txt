@@ -1,0 +1,4 @@
+mistune==2.0.4
+pygments>=2.6.1
+asciirend>=0.2.0
+jinja2==3.1.2

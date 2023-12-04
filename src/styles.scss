@@ -1,0 +1,208 @@
+/* You can add global styles to this file, and also import other style files */
+
+$font_ver: 1;
+$bgcolor: #191919;
+$color1: #70877F;
+$color2: #C2EFB3;
+$color3: #F2A65A;
+$color4: #F58549;
+$color5: #FFF5EE;
+$logo: #139264;
+
+// Positioning of page
+
+body {
+    text-align: center;
+}
+
+.pre-logo {
+    text-align: center;
+}
+
+.pre-logo pre {
+    display: inline-block;
+    text-align: left;
+}
+
+.logo {
+    display: inline-block;
+    text-align: left;
+	color: $logo;
+}
+
+.root {
+    display: inline-block;
+    margin: calc(min(10px, 1vw));
+    max-width: 100%;
+    text-align: left;
+    margin-top: calc(min(55px, calc(clamp((1vw - 1vh) * 0.5, 1vh, 0vh) * 5)));
+}
+
+.pre-content {
+    display: inline-block;
+    max-width: 100%;
+    text-align: left;
+    //background-color: rgba(100, 100, 100, 0.1);
+    //box-shadow: 1px 1px 100px $shadow-color;
+}
+
+.content {
+    margin: 30px;
+    width: calc(min(90vw, max(50vw, 20cm)));
+    max-width: calc(max(60vw, 30cm));
+	doverflow: hidden;
+}
+
+.content img {
+	max-width: 100%;
+}
+
+// Github users
+
+.profile-img {
+  margin-right: 1em;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+}
+
+// Fonts
+
+@function font($font) {
+  @return url('static/woff2/' + $font + '.woff2?ver=' + $font_ver) format('woff2'), url("static/woff/" + $font + ".woff?ver=" + $font_ver) format("woff")
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: font('FiraCode-Light');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: font('FiraCode-Regular');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: font('FiraCode-Medium');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: font('FiraCode-SemiBold');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: font('FiraCode-Bold');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code VF';
+  src: font('FiraCode-VF');
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+html {
+  background: $bgcolor;
+  color: $color5;
+  font-family: Fira Code;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+a {
+  color: $color5;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  color: $color5;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+h2 {
+  color: $color5;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+h3 {
+  color: $color5;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+h4 {
+  color: $color5;
+  font-family: Fira Code;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.highlight {
+  border: 2px solid $color1;
+  background-color: #1e1e1e;
+  pre {
+    padding: 7px;
+	margin: 0;
+    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
+    srollbar-color: rgba(70, 70, 70, 0.5) rgb(20, 20, 20);
+
+    color: #d4d4d4;
+    background-color: #1e1e1e;
+    font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+  }
+  pre::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+  pre::-webkit-scrollbar-thumb {
+    background: rgba(70, 70, 70, 0.5);
+  }
+  pre::-webkit-scrollbar-track {
+    background: rgb(20, 20, 20);
+  }
+}
+
+.asciirend {
+  @extend .highlight;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.code-inline {
+  white-space: nowrap;
+  background-color: #1e1e1e;
+  font-weight: 400;
+  font-size: 15px;
+}
+
