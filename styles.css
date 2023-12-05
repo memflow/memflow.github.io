@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  text-align: center; }
+
+.pre-logo {
+  text-align: center; }
+
+.pre-logo pre {
+  display: inline-block;
+  text-align: left; }
+
+.logo {
+  display: inline-block;
+  text-align: left;
+  color: #139264; }
+
+.root {
+  display: inline-block;
+  margin: calc(min(10px, 1vw));
+  max-width: 100%;
+  text-align: left;
+  margin-top: calc(min(55px, calc(clamp((1vw - 1vh) * 0.5, 1vh, 0vh) * 5))); }
+
+.pre-content {
+  display: inline-block;
+  max-width: 100%;
+  text-align: left; }
+
+.content {
+  margin: 30px;
+  width: calc(min(90vw, max(50vw, 20cm)));
+  max-width: calc(max(60vw, 30cm));
+  doverflow: hidden; }
+
+.content img {
+  max-width: 100%; }
+
+.profile-img {
+  margin-right: 1em;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("static/woff2/FiraCode-Light.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-Light.woff?ver=1") format("woff");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("static/woff2/FiraCode-Regular.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-Regular.woff?ver=1") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("static/woff2/FiraCode-Medium.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-Medium.woff?ver=1") format("woff");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("static/woff2/FiraCode-SemiBold.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-SemiBold.woff?ver=1") format("woff");
+  font-weight: 600;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("static/woff2/FiraCode-Bold.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-Bold.woff?ver=1") format("woff");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code VF';
+  src: url("static/woff2/FiraCode-VF.woff2?ver=1") format("woff2"), url("static/woff/FiraCode-VF.woff?ver=1") format("woff");
+  font-weight: 300 700;
+  font-style: normal; }
+
+html {
+  background: #191919;
+  color: #FFF5EE;
+  font-family: Fira Code;
+  font-weight: 300;
+  font-size: 14px; }
+
+a {
+  color: #FFF5EE;
+  text-decoration: underline; }
+  a:hover {
+    text-decoration: none; }
+
+h1 {
+  color: #FFF5EE;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 24px; }
+
+h2 {
+  color: #FFF5EE;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 20px; }
+
+h3 {
+  color: #FFF5EE;
+  font-family: Fira Code;
+  font-weight: 500;
+  font-size: 16px; }
+
+h4 {
+  color: #FFF5EE;
+  font-family: Fira Code;
+  font-weight: 400;
+  font-size: 15px; }
+
+.highlight, .asciirend {
+  border: 2px solid #70877F;
+  background-color: #1e1e1e; }
+  .highlight pre, .asciirend pre {
+    padding: 7px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
+    srollbar-color: rgba(70, 70, 70, 0.5) #141414;
+    color: #d4d4d4;
+    background-color: #1e1e1e;
+    font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px; }
+  .highlight pre::-webkit-scrollbar, .asciirend pre::-webkit-scrollbar {
+    width: 15px;
+    height: 15px; }
+  .highlight pre::-webkit-scrollbar-thumb, .asciirend pre::-webkit-scrollbar-thumb {
+    background: rgba(70, 70, 70, 0.5); }
+  .highlight pre::-webkit-scrollbar-track, .asciirend pre::-webkit-scrollbar-track {
+    background: #141414; }
+
+.asciirend {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden; }
+
+.code-inline {
+  white-space: nowrap;
+  background-color: #1e1e1e;
+  font-weight: 400;
+  font-size: 15px; }

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>memflow project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" href="../styles.css"></head>
+</head>
+<body>
+    <div class="root">
+        <div class="pre-logo">
+        <pre class="logo">
+                             ______             
+   ____ ___  ___  ____ ___  / __/ /___ _      __
+  / __ `__ \/ _ \/ __ `__ \/ /_/ / __ \ | /| / /
+ / / / / / /  __/ / / / / / __/ / /_/ / |/ |/ / 
+/_/ /_/ /_/\___/_/ /_/ /_/_/ /_/\____/|__/|__/</pre>
+            <ul class="navbar">
+                
+				<a href=../>Home</a>
+                <pre> | </pre>
+                
+                
+				<a href=../about>About</a>
+                <pre> | </pre>
+                
+                
+				<a href=../quick_start>Quick start guide</a>
+                <pre> | </pre>
+                
+                
+				<a href=../docs>Documentation</a>
+                
+            </ul> 
+        </div>
+
+        <div class="pre-content">
+            <div class="content">
+                <h1>Quick start guide</h1>
+<h2>1. Binary Installation</h2>
+<p>// TODO: provide linux/mac packages (aur, homebrew) and windows binaries</p>
+<p>Currently, only source installation is available, so please follow the next section.</p>
+<h2>2. Compiling from Source</h2>
+<h3>2.0. Prerequisites</h3>
+<p>memflow is written entirely in <a href="https://www.rust-lang.org/">Rust</a>. It is therefore required to have a Rust toolchain installed. memflow is verified to compile on the stable toolchain of Rust 1.45.1.</p>
+<p>More information on how to install Rust can be obtained from the <a href="https://rustup.rs/">rustup project website</a>.</p>
+<h3>2.1. Connectors</h3>
+<p>Recommended way to manage multiple connectors is through the <a href="https://github.com/memflow/memflowup">memflowup</a> utility. It requires <a href="https://www.python.org/">Python 3</a>.</p>
+<h4>2.1.1. Linux / macOS in one line</h4>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/memflow/memflowup/master/memflowup.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3
+</pre></div>
+<h4>2.1.2. With Git</h4>
+<p>Clone and run the script:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/memflow/memflowup.git
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>memflowup
+$<span class="w"> </span>python3<span class="w"> </span>memflowup.py
+</pre></div>
+<p>Update installed connectors:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>memflowup.py<span class="w"> </span>update
+</pre></div>
+<h3>2.2. CLI</h3>
+<h4>2.2.1 Client</h4>
+<p>Install the client:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>cargo<span class="w"> </span>install<span class="w"> </span>--git<span class="w"> </span>https://github.com/memflow/memflow-cli/<span class="w"> </span>memflow-cli
+</pre></div>
+<p>(If running local daemon) By default, memflow socket is only accessible to the memflow group, create it, and add your user:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>groupadd<span class="w"> </span>memflow
+$<span class="w"> </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>memflow<span class="w"> </span><span class="o">(</span>username<span class="o">)</span>
+</pre></div>
+<p>You will need to logout for the group changes to be applied</p>
+<h4>2.2.2 Daemon</h4>
+<p>Daemon is currently only supported on Unix systems.</p>
+<p>Install the daemon and create initial config:</p>
+<div class="highlight"><pre><span></span>$<span class="w"> </span>cargo<span class="w"> </span>install<span class="w"> </span>--git<span class="w"> </span>https://github.com/memflow/memflow-cli/<span class="w"> </span>memflow-daemon
+$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/memflow/
+$<span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/memflow/memflow-cli/master/daemon.conf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/memflow/daemon.conf
+</pre></div>
+<h2>3. Running in Docker</h2>
+<p>// TODO: implement + describe docker setup</p>
+<h2>4. The command-line interface</h2>
+<p>// TODO: show cli usage</p>
+<h2>5. Working with the library</h2>
+<p>// TODO: write and explain examples</p>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
