@@ -15,10 +15,10 @@ template = env.get_template('main.html')
 # Define custom variables passed over to the templates
 template_vars = {
     'navbar': [
-        ('', 'Home'),
-        ('about', 'About'),
-        ('quick_start', 'Quick start guide'),
-        ('docs', 'Documentation'),
+        ('/', 'Home'),
+        ('about/', 'About'),
+        ('quick_start/', 'Quick start guide'),
+        ('docs/', 'Documentation'),
     ]
 }
 
