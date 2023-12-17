@@ -38,50 +38,189 @@
         <div class="pre-content">
             <div class="content">
                 <h1>Quick start guide</h1>
-<h2>1. Binary Installation</h2>
-<p>// TODO: provide linux/mac packages (aur, homebrew) and windows binaries</p>
-<p>Currently, only source installation is available, so please follow the next section.</p>
-<h2>2. Compiling from Source</h2>
-<h3>2.0. Prerequisites</h3>
-<p>memflow is written entirely in <a href="https://www.rust-lang.org/">Rust</a>. It is therefore required to have a Rust toolchain installed. memflow is verified to compile on the stable toolchain of Rust 1.45.1.</p>
-<p>More information on how to install Rust can be obtained from the <a href="https://rustup.rs/">rustup project website</a>.</p>
-<h3>2.1. Connectors</h3>
-<p>Recommended way to manage multiple connectors is through the <a href="https://github.com/memflow/memflowup">memflowup</a> utility. It requires <a href="https://www.python.org/">Python 3</a>.</p>
-<h4>2.1.1. Linux / macOS in one line</h4>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/memflow/memflowup/master/memflowup.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3
+<p>Here you can find quick-start guides to run memflow on <a href="#windows">Windows</a> and <a href="#linux">Linux</a>.</p>
+<h2 id="linux">Linux</h2>
+<h3>1. Installing memflowup</h3>
+<p>Please make sure that rustup and cargo are properly installed on your system and cargo has at least version 1.70.0. You can verify the version via:</p>
+<div class="highlight"><pre><span></span>&gt; cargo --version
+cargo 1.74.1 (ecb9851af 2023-10-18)
 </pre></div>
-<h4>2.1.2. With Git</h4>
-<p>Clone and run the script:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/memflow/memflowup.git
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>memflowup
-$<span class="w"> </span>python3<span class="w"> </span>memflowup.py
+<p>In case your cargo/rust version is outdated you can instruct <code>rustup</code> to update your toolchain:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">rustup</span><span class="w"> </span><span class="n">update</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">syncing</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;stable-x86_64-pc-windows-msvc&#39;</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">syncing</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;nightly-x86_64-pc-windows-msvc&#39;</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">update</span>
+
+<span class="w">  </span><span class="n">stable</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">windows</span><span class="o">-</span><span class="n">msvc</span><span class="w"> </span><span class="n">unchanged</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rustc</span><span class="w"> </span><span class="mf">1.74</span><span class="o">.</span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="n">a28077b28</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">04</span><span class="p">)</span>
+<span class="w">  </span><span class="n">nightly</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">windows</span><span class="o">-</span><span class="n">msvc</span><span class="w"> </span><span class="n">unchanged</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rustc</span><span class="w"> </span><span class="mf">1.76</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">nightly</span><span class="w"> </span><span class="p">(</span><span class="n">a96d57bdb</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">downloads</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="n">directories</span>
 </pre></div>
-<p>Update installed connectors:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>python3<span class="w"> </span>memflowup.py<span class="w"> </span>update
+<p>After setting up cargo properly you can install memflowup via our install script:</p>
+<div class="highlight"><pre><span></span>&gt; curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.memflow.io | bash
 </pre></div>
-<h3>2.2. CLI</h3>
-<h4>2.2.1 Client</h4>
-<p>Install the client:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>cargo<span class="w"> </span>install<span class="w"> </span>--git<span class="w"> </span>https://github.com/memflow/memflow-cli/<span class="w"> </span>memflow-cli
+<p>Alternatively you can install memflowup via cargo:</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span><span class="w"> </span><span class="o">--</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;=0.1.0-beta11&quot;</span>
+<span class="o">...</span>
+<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="o">-</span><span class="nx">beta11</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
 </pre></div>
-<p>(If running local daemon) By default, memflow socket is only accessible to the memflow group, create it, and add your user:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>groupadd<span class="w"> </span>memflow
-$<span class="w"> </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>memflow<span class="w"> </span><span class="o">(</span>username<span class="o">)</span>
+<h4>Note</h4>
+<p>memflowup should <strong>not</strong> be installed or ran as root or via sudo. By default rust installs cargo and all binaries installed via cargo on a per-user basis. This means running the installation as root will result in memflowup being placed in <code>/root/</code> (because it is the root user's home directory) and will also only be accessible from the root user.</p>
+<h3>2. Installing plugins</h3>
+<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).</p>
+<p>Installing packages system-wide will place all plugins in <code>/usr/local/lib/memflow</code>.<br />
+Installing packages per user will place all plugins in <code>$HOME/.local/lib/memflow</code>.</p>
+<p>You might also want to build all packages from source for now.</p>
+<p>memflow will later automatically look in both of those directories (and the current working directory) for plugins.</p>
+<p>Please make sure to <strong>not</strong> run memflow as root (see the <a href="#note">note</a> above)</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">interactive</span>
+<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">source</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">y</span><span class="o">/</span><span class="nx">N</span><span class="p">]:</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span>
+<span class="nx">Running</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">interactive</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">re</span><span class="o">-</span><span class="nx">run</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">packages</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">paths</span><span class="p">.</span>
+<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">initial</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">system</span><span class="o">-</span><span class="nx">wide</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">Y</span><span class="o">/</span><span class="nx">n</span><span class="p">]:</span><span class="w"> </span><span class="nx">n</span>
+<span class="nx">which</span><span class="w"> </span><span class="nx">channel</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">stable</span><span class="o">/</span><span class="nx">DEVELOPMENT</span><span class="p">]:</span><span class="w"> </span><span class="nx">development</span>
+<span class="nx">Available</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">channel</span><span class="p">:</span>
+<span class="mi">0</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">win32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">native</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">qemu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">coredump</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">4</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">pcileech</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+
+<span class="nx">Type</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">all</span><span class="p">:</span>
+<span class="o">*</span>
+
+<span class="o">...</span>
+<span class="nx">Initial</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="nx">done</span><span class="p">!</span>
 </pre></div>
-<p>You will need to logout for the group changes to be applied</p>
-<h4>2.2.2 Daemon</h4>
-<p>Daemon is currently only supported on Unix systems.</p>
-<p>Install the daemon and create initial config:</p>
-<div class="highlight"><pre><span></span>$<span class="w"> </span>cargo<span class="w"> </span>install<span class="w"> </span>--git<span class="w"> </span>https://github.com/memflow/memflow-cli/<span class="w"> </span>memflow-daemon
-$<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/memflow/
-$<span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/memflow/memflow-cli/master/daemon.conf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/memflow/daemon.conf
+<p>It is always possible to re-run interactive mode and redo the initial setup.</p>
+<h3>2. Updating plugins</h3>
+<p>To update all the installed plugins simply run <code>memflowup update</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflow</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">--</span><span class="n">help</span>
+<span class="n">Updates</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">packages</span>
+
+<span class="k">Usage</span><span class="err">:</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">[</span><span class="n">OPTIONS</span><span class="o">]</span>
+
+<span class="nl">Options</span><span class="p">:</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="k">user</span><span class="o">-</span><span class="k">index</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="k">index</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">builtin</span><span class="o">-</span><span class="k">index</span>
+<span class="w">  </span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="k">system</span><span class="w">                 </span><span class="n">Enables</span><span class="w"> </span><span class="k">system</span><span class="o">-</span><span class="n">wide</span><span class="w"> </span><span class="n">installation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">users</span>
+<span class="w">  </span><span class="o">-</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="n">dev</span>
+<span class="w">  </span><span class="o">-</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="c1">--help                   Print help</span>
 </pre></div>
-<h2>3. Running in Docker</h2>
-<p>// TODO: implement + describe docker setup</p>
-<h2>4. The command-line interface</h2>
-<p>// TODO: show cli usage</p>
-<h2>5. Working with the library</h2>
-<p>// TODO: write and explain examples</p>
+<p>In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup update -d
+</pre></div>
+<h3>3. Verify your installation and run an example</h3>
+<p>To test if everything is working properly the easiest method is to simply
+use one of the <a href="https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples">examples</a> provided in memflow.</p>
+<p>To run the examples simply check out the memflow repo with the appropiate version:</p>
+<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+&gt; cd memflow
+</pre></div>
+<p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.</p>
+<p>And run one of the examples:</p>
+<div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
+</pre></div>
+<p>This examples runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://man7.org/linux/man-pages/man2/process_vm_readv.2.html">process_vm_readv</a> and <a href="https://man7.org/linux/man-pages/man2/process_vm_writev.2.html">process_vm_writev</a>).</p>
+<p>If everything went well you should see a list of all open processes:</p>
+<div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
+  PID   SYS ARCH  PROC ARCH NAME
+
+...
+</pre></div>
+<h2 id="windows">Windows</h2>
+<h3>1. Installing memflowup</h3>
+<p>Please make sure that rustup and cargo are properly installed on your system and cargo has at least version 1.70.0. You can verify the version via:</p>
+<div class="highlight"><pre><span></span>&gt; cargo --version
+cargo 1.74.1 (ecb9851af 2023-10-18)
+</pre></div>
+<p>In case your cargo/rust version is outdated you can instruct <code>rustup</code> to update your toolchain:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">rustup</span><span class="w"> </span><span class="n">update</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">syncing</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;stable-x86_64-pc-windows-msvc&#39;</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">syncing</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="n">updates</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">&#39;nightly-x86_64-pc-windows-msvc&#39;</span>
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">checking</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="bp">self</span><span class="o">-</span><span class="n">update</span>
+
+<span class="w">  </span><span class="n">stable</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">windows</span><span class="o">-</span><span class="n">msvc</span><span class="w"> </span><span class="n">unchanged</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rustc</span><span class="w"> </span><span class="mf">1.74</span><span class="o">.</span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="n">a28077b28</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">04</span><span class="p">)</span>
+<span class="w">  </span><span class="n">nightly</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">windows</span><span class="o">-</span><span class="n">msvc</span><span class="w"> </span><span class="n">unchanged</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">rustc</span><span class="w"> </span><span class="mf">1.76</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">nightly</span><span class="w"> </span><span class="p">(</span><span class="n">a96d57bdb</span><span class="w"> </span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">downloads</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="n">directories</span>
+</pre></div>
+<p>After setting up cargo properly you can install memflowup via cargo:</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span><span class="w"> </span><span class="o">--</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;=0.1.0-beta11&quot;</span>
+<span class="o">...</span>
+<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="o">-</span><span class="nx">beta11</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
+</pre></div>
+<h3>2. Installing plugins</h3>
+<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).</p>
+<p>Installing packages system-wide will place all plugins in <code>%ProgramFiles%\memflow\</code>.<br />
+Installing packages per user will place all plugins in <code>%UserProfile%\Documents\memflow\</code>.</p>
+<p>You might also want to build all packages from source for now.</p>
+<p>memflow will later automatically look in both of those directories (and the current working directory) for plugins.</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">interactive</span>
+<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">source</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">y</span><span class="o">/</span><span class="nx">N</span><span class="p">]:</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span>
+<span class="nx">Running</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">interactive</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">re</span><span class="o">-</span><span class="nx">run</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">packages</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">paths</span><span class="p">.</span>
+<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">initial</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">system</span><span class="o">-</span><span class="nx">wide</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">Y</span><span class="o">/</span><span class="nx">n</span><span class="p">]:</span><span class="w"> </span><span class="nx">n</span>
+<span class="nx">which</span><span class="w"> </span><span class="nx">channel</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">stable</span><span class="o">/</span><span class="nx">DEVELOPMENT</span><span class="p">]:</span><span class="w"> </span><span class="nx">development</span>
+<span class="nx">Available</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">channel</span><span class="p">:</span>
+<span class="mi">0</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">win32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">native</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">qemu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">coredump</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+<span class="mi">4</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">pcileech</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
+
+<span class="nx">Type</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">all</span><span class="p">:</span>
+<span class="o">*</span>
+
+<span class="o">...</span>
+<span class="nx">Initial</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="nx">done</span><span class="p">!</span>
+</pre></div>
+<p>It is always possible to re-run interactive mode and redo the initial setup.</p>
+<h3>2. Updating plugins</h3>
+<p>To update all the installed plugins simply run <code>memflowup update</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflow</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">--</span><span class="n">help</span>
+<span class="n">Updates</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">packages</span>
+
+<span class="k">Usage</span><span class="err">:</span><span class="w"> </span><span class="n">memflowup</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">[</span><span class="n">OPTIONS</span><span class="o">]</span>
+
+<span class="nl">Options</span><span class="p">:</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="k">user</span><span class="o">-</span><span class="k">index</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="k">index</span>
+<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">builtin</span><span class="o">-</span><span class="k">index</span>
+<span class="w">  </span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="k">system</span><span class="w">                 </span><span class="n">Enables</span><span class="w"> </span><span class="k">system</span><span class="o">-</span><span class="n">wide</span><span class="w"> </span><span class="n">installation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">users</span>
+<span class="w">  </span><span class="o">-</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="n">dev</span>
+<span class="w">  </span><span class="o">-</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="c1">--help                   Print help</span>
+</pre></div>
+<p>In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup update -d
+</pre></div>
+<h3>3. Verify your installation and run an example</h3>
+<p>To test if everything is working properly the easiest method is to simply
+use one of the <a href="https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples">examples</a> provided in memflow.</p>
+<p>To run the examples simply check out the memflow repo with the appropiate version:</p>
+<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+&gt; cd memflow
+</pre></div>
+<p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.
+In case you are missing git you can install it from <a href="https://git-scm.com/download/win">here</a>.</p>
+<p>And run one of the examples:</p>
+<div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
+</pre></div>
+<p>This examples runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory">ReadProcessMemory</a> and <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory">WriteProcessMemory</a>).</p>
+<p>If everything went well you should see a list of all open processes:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">cargo</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">example</span><span class="w"> </span><span class="n">process_list</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="n">os</span><span class="w"> </span><span class="n">native</span>
+<span class="w">  </span><span class="n">PID</span><span class="w">   </span><span class="n">SYS</span><span class="w"> </span><span class="n">ARCH</span><span class="w">  </span><span class="n">PROC</span><span class="w"> </span><span class="n">ARCH</span><span class="w"> </span><span class="n">NAME</span>
+<span class="w">    </span><span class="mi">0</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="p">[</span><span class="n">System</span><span class="w"> </span><span class="n">Process</span><span class="p">]</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w">    </span><span class="mi">4</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">System</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w">  </span><span class="mi">300</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">Secure</span><span class="w"> </span><span class="n">System</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w">  </span><span class="mi">348</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">Registry</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w">  </span><span class="mi">952</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">smss</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w"> </span><span class="mi">1316</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">csrss</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w"> </span><span class="mi">1412</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">wininit</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w"> </span><span class="mi">1420</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">csrss</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+<span class="w"> </span><span class="mi">1484</span><span class="w">   </span><span class="n">x86_64</span><span class="w">     </span><span class="n">x86_64</span><span class="w">   </span><span class="n">services</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">Alive</span><span class="p">)</span>
+
+<span class="p">...</span>
+</pre></div>
 
             </div>
         </div>
