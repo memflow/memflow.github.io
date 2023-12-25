@@ -22,6 +22,10 @@
                 <pre> | </pre>
                 
                 
+				<a href="../blog/">Blog</a>
+                <pre> | </pre>
+                
+                
 				<a href="../about/">About</a>
                 <pre> | </pre>
                 
@@ -60,14 +64,14 @@ cargo 1.74.1 (ecb9851af 2023-10-18)
 <div class="highlight"><pre><span></span>&gt; curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.memflow.io | bash
 </pre></div>
 <p>Alternatively you can install memflowup via cargo:</p>
-<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span><span class="w"> </span><span class="o">--</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;=0.1.0-beta11&quot;</span>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span>
 <span class="o">...</span>
-<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="o">-</span><span class="nx">beta11</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
+<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
 </pre></div>
 <h4>Note</h4>
 <p>memflowup should <strong>not</strong> be installed or ran as root or via sudo. By default rust installs cargo and all binaries installed via cargo on a per-user basis. This means running the installation as root will result in memflowup being placed in <code>/root/</code> (because it is the root user's home directory) and will also only be accessible from the root user.</p>
 <h3>2. Installing plugins</h3>
-<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).</p>
+<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the stable branch.</p>
 <p>Installing packages system-wide will place all plugins in <code>/usr/local/lib/memflow</code>.<br />
 Installing packages per user will place all plugins in <code>$HOME/.local/lib/memflow</code>.</p>
 <p>You might also want to build all packages from source for now.</p>
@@ -112,9 +116,9 @@ Installing packages per user will place all plugins in <code>$HOME/.local/lib/me
 </pre></div>
 <h3>3. Verify your installation and run an example</h3>
 <p>To test if everything is working properly the easiest method is to simply
-use one of the <a href="https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples">examples</a> provided in memflow.</p>
+use one of the <a href="https://github.com/memflow/memflow/tree/stable/memflow/examples">examples</a> provided in memflow.</p>
 <p>To run the examples simply check out the memflow repo with the appropiate version:</p>
-<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch stable https://github.com/memflow/memflow
 &gt; cd memflow
 </pre></div>
 <p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.</p>
@@ -146,12 +150,12 @@ cargo 1.74.1 (ecb9851af 2023-10-18)
 <span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">downloads</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="n">directories</span>
 </pre></div>
 <p>After setting up cargo properly you can install memflowup via cargo:</p>
-<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span><span class="w"> </span><span class="o">--</span><span class="nx">version</span><span class="w"> </span><span class="s">&quot;=0.1.0-beta11&quot;</span>
+<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span>
 <span class="o">...</span>
-<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="o">-</span><span class="nx">beta11</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
+<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
 </pre></div>
 <h3>2. Installing plugins</h3>
-<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).</p>
+<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the stable branch.</p>
 <p>Installing packages system-wide will place all plugins in <code>%ProgramFiles%\memflow\</code>.<br />
 Installing packages per user will place all plugins in <code>%UserProfile%\Documents\memflow\</code>.</p>
 <p>You might also want to build all packages from source for now.</p>
@@ -195,9 +199,9 @@ Installing packages per user will place all plugins in <code>%UserProfile%\Docum
 </pre></div>
 <h3>3. Verify your installation and run an example</h3>
 <p>To test if everything is working properly the easiest method is to simply
-use one of the <a href="https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples">examples</a> provided in memflow.</p>
+use one of the <a href="https://github.com/memflow/memflow/tree/stable/memflow/examples">examples</a> provided in memflow.</p>
 <p>To run the examples simply check out the memflow repo with the appropiate version:</p>
-<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch stable https://github.com/memflow/memflow
 &gt; cd memflow
 </pre></div>
 <p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.
