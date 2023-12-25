@@ -19,7 +19,7 @@ template_vars = {
         ('blog/', 'Blog'),
         ('about/', 'About'),
         ('quick_start/', 'Quick start guide'),
-        ('docs/', 'Documentation'),
+        ('https://docs.rs/memflow', 'Documentation'),
     ]
 }
 
