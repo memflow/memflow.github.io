@@ -171,11 +171,11 @@ mismatch of plugin's `rustc` version and the one of the user's code. While the l
 stable most of the time, the tides started to shift a few years ago, as more effort was put into
 trait objects on the compiler front.
 
-For 0.2, we knew we could not keep the status quo, so, we built `cglue`. The crate allows for
-simple and flexible ABI safe code generation, suited for the needs of `memflow`. Throughout the
-(very long) beta period, we received 0 crash reports stemming from ABI instability, while 0.1 had
-such cases. Therefore, we can conclude that it was a good investment that already made memflow more
-stable.
+For 0.2, we knew we could not keep the status quo, so, we built
+[`cglue`](https://github.com/h33p/cglue). The crate allows for simple and flexible ABI safe code
+generation, suited for the needs of `memflow`. Throughout the (very long) beta period, we received
+0 crash reports stemming from ABI instability, while 0.1 had such cases. Therefore, we can conclude
+that it was a good investment that already made memflow more stable.
 
 In `0.2.0-betaX` series, you may have encountered "invalid ABI" errors, well, fear not, because in
 stable series, we commit to not breaking the ABI across entirety of `0.2` series, so this problem
