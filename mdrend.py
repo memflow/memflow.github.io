@@ -58,16 +58,18 @@ class CustomizedRenderer(md.HTMLRenderer):
             scene = '{' + d[1]
 
         color = int(props['color']) if 'color' in props else 0
-        w = int(props['w']) if 'w' in props else 64
+        w = int(props['w']) if 'w' in props else 72
         h = int(props['h']) if 'h' in props else 32
         aspect = float(w / (2 * h))
+
+        # These parameters are not actually used in latest asciirend
         ortho = bool(props['ortho']) if 'ortho' in props else True
         fov = float(props['fov']) if 'fov' in props else 1.0
         znear = float(props['znear']) if 'znear' in props else 0.1
         zfar = float(props['zfar']) if 'zfar' in props else 100.0
 
         self.scene_props[div_id] = {
-            'scene': scene,
+            'scene': scene.replace('\n', ''),
             'w': w,
             'h': h,
             'aspect': aspect,
@@ -77,9 +79,11 @@ class CustomizedRenderer(md.HTMLRenderer):
             'zfar': zfar,
             'dynamic_w': bool(props['dynamic_w']) if 'dynamic_w' in props else False,
             'dynamic_h': bool(props['dynamic_h']) if 'dynamic_h' in props else False,
+            'show_usage': bool(props['show_usage']) if 'show_usage' in props else True,
+            'disable_zoom': bool(props['disable_zoom']) if 'disable_zoom' in props else False,
         }
 
-        rendered = ar.ascii_render(scene, color, w, h, aspect, ortho, fov, znear, zfar)
+        rendered = ar.ascii_render(scene, color, w, h, aspect, ortho, fov, znear, zfar, 0.0)
         return f'<div class="asciirend" id="asciirend-{div_id}"><pre>{rendered}</pre></div>';
 
     def gh_users_render(self, code):
@@ -102,8 +106,6 @@ class CustomizedRenderer(md.HTMLRenderer):
             <br/>
             """
 
-            print(line)
-
         return output
 
     def block_code(self, code, lang=None):
@@ -118,8 +120,6 @@ class CustomizedRenderer(md.HTMLRenderer):
                 lexer = guess_lexer(code)
             except ClassNotFound:
                 lexer = get_lexer_by_name("html", stripall=True)
-
-        print(str(lexer))
 
         formatter = HtmlFormatter()
         return highlight(code, lexer, formatter)
@@ -159,19 +159,20 @@ def shortdown(value):
     md_rend = md.create_markdown(renderer=renderer, plugins=['strikethrough'])
     return md_rend(trimmed)
 
-def markdown(value):
+def markdown(value, backlink):
+    print(backlink)
     renderer = CustomizedRenderer()
     md_rend = md.create_markdown(renderer=renderer, plugins=['task_lists', 'table', 'footnotes', 'strikethrough'], escape=False)
     rendered = md_rend(value)
     if renderer.scene_cnt > 0:
-        javascript = """
+        javascript = f"""
 <script type="module">
-	import ascii_render from "/static/js/draw.js";
+	import ascii_render from "{backlink}static/js/draw.js";
         """
         for i in range(renderer.scene_cnt):
             props = renderer.scene_props[i]
             javascript += f'const scene_{i} = \'{props["scene"].rstrip()}\';\n'
-            javascript += f'ascii_render("asciirend-{i}", scene_{i}, {props["w"] if not props["dynamic_w"] else "null"}, {props["h"] if not props["dynamic_h"] else "null"}, {"true" if props["ortho"] else "false"}, {props["fov"]}, {props["znear"]}, {props["zfar"]});\n'
+            javascript += f'ascii_render("asciirend-{i}", scene_{i}, {props["w"] if not props["dynamic_w"] else "null"}, {props["h"] if not props["dynamic_h"] else "null"}, {"true" if props["ortho"] else "false"}, {props["fov"]}, {props["znear"]}, {props["zfar"]}, {"true" if props["show_usage"] else "false"}, {"true" if props["disable_zoom"] else "false"});\n'
         javascript += """
 </script>
         """

@@ -16,6 +16,7 @@ template = env.get_template('main.html')
 template_vars = {
     'navbar': [
         ('/', 'Home'),
+        ('blog/', 'Blog'),
         ('about/', 'About'),
         ('quick_start/', 'Quick start guide'),
         ('docs/', 'Documentation'),

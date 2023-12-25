@@ -31,9 +31,9 @@ After setting up cargo properly you can install memflowup via our install script
 
 Alternatively you can install memflowup via cargo:
 ```
-> cargo install memflowup --force --version "=0.1.0-beta11"
+> cargo install memflowup --force
 ...
-Installed package `memflowup v0.1.0-beta11` (executable `memflowup.exe`)
+Installed package `memflowup v0.1.0` (executable `memflowup.exe`)
 ```
 
 #### Note
@@ -41,7 +41,7 @@ memflowup should __not__ be installed or ran as root or via sudo. By default rus
 
 ### 2. Installing plugins
 
-When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).
+When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the stable branch.
 
 Installing packages system-wide will place all plugins in `/usr/local/lib/memflow`.\
 Installing packages per user will place all plugins in `$HOME/.local/lib/memflow`.
@@ -99,11 +99,11 @@ In case you installed the plugins like in the example above you can simply use t
 ### 3. Verify your installation and run an example
 
 To test if everything is working properly the easiest method is to simply
-use one of the [examples](https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples) provided in memflow.
+use one of the [examples](https://github.com/memflow/memflow/tree/stable/memflow/examples) provided in memflow.
 
 To run the examples simply check out the memflow repo with the appropiate version:
 ```
-> git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+> git clone --depth 1 --branch stable https://github.com/memflow/memflow
 > cd memflow
 ```
 
@@ -147,14 +147,14 @@ info: cleaning up downloads & tmp directories
 
 After setting up cargo properly you can install memflowup via cargo:
 ```
-> cargo install memflowup --force --version "=0.1.0-beta11"
+> cargo install memflowup --force
 ...
-Installed package `memflowup v0.1.0-beta11` (executable `memflowup.exe`)
+Installed package `memflowup v0.1.0` (executable `memflowup.exe`)
 ```
 
 ### 2. Installing plugins
 
-When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the 0.2.0-beta branch (development).
+When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the stable branch.
 
 Installing packages system-wide will place all plugins in `%ProgramFiles%\memflow\`.\
 Installing packages per user will place all plugins in `%UserProfile%\Documents\memflow\`.
@@ -210,11 +210,11 @@ In case you installed the plugins like in the example above you can simply use t
 ### 3. Verify your installation and run an example
 
 To test if everything is working properly the easiest method is to simply
-use one of the [examples](https://github.com/memflow/memflow/tree/0.2.0-beta11/memflow/examples) provided in memflow.
+use one of the [examples](https://github.com/memflow/memflow/tree/stable/memflow/examples) provided in memflow.
 
 To run the examples simply check out the memflow repo with the appropiate version:
 ```
-> git clone --depth 1 --branch 0.2.0-beta11 https://github.com/memflow/memflow
+> git clone --depth 1 --branch stable https://github.com/memflow/memflow
 > cd memflow
 ```
 
