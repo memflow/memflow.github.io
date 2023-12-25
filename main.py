@@ -8,8 +8,15 @@ import sass
 src_dir = 'src'
 out_dir = 'output'
 
+def linkup(a, b):
+    if '://' in a:
+        return a
+    else:
+        return b + a
+
 env = Environment(loader=FileSystemLoader('templates'))
 env.filters['markdown'] = markdown
+env.filters['linkup'] = linkup
 template = env.get_template('main.html')
 
 # Define custom variables passed over to the templates
