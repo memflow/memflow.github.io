@@ -24,16 +24,11 @@ info: checking for self-update
 info: cleaning up downloads & tmp directories
 ```
 
-After setting up cargo properly you can install memflowup via our install script:
-```
-> curl --proto '=https' --tlsv1.2 -sSf https://sh.memflow.io | bash
-```
-
-Alternatively you can install memflowup via cargo:
+On Windows, install memflowup via cargo:
 ```
 > cargo install memflowup --force
 ...
-Installed package `memflowup v0.1.0` (executable `memflowup.exe`)
+Installed package `memflowup v0.2.0` (executable `memflowup`)
 ```
 
 #### Note
@@ -41,79 +36,77 @@ memflowup should __not__ be installed or ran as root or via sudo. By default rus
 
 ### 2. Installing plugins
 
-When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the stable branch.
+To get started quickly, you can pull all available plugins from the default registry:
 
-Installing packages system-wide will place all plugins in `/usr/local/lib/memflow`.\
-Installing packages per user will place all plugins in `$HOME/.local/lib/memflow`.
-
-You might also want to build all packages from source for now.
-
-memflow will later automatically look in both of those directories (and the current working directory) for plugins.
-
-Please make sure to __not__ run memflow as root (see the [note](#note) above)
 ```
-> memflowup interactive
-do you want to build packages from source? [y/N]: y 
-Running in interactive mode. You can always re-run memflowup to install additional packages, or to different paths.
-do you want to install the initial packages system-wide? [Y/n]: n
-which channel do you want to use? [stable/DEVELOPMENT]: development
-Available packages in dev channel:
-0. memflow-win32 - CorePlugin
-1. memflow-native - CorePlugin
-2. memflow-qemu - CorePlugin
-3. memflow-coredump - CorePlugin
-4. memflow-pcileech - CorePlugin
-
-Type packages to install by number, name, or type * for all:
-*
-
-...
-Initial setup done!
+> memflowup pull --all
 ```
 
-It is always possible to re-run interactive mode and redo the initial setup.
+This will download and install all memflow plugins from the registry (http://registry.memflow.io).
 
-### 2. Updating plugins
-
-To update all the installed plugins simply run `memflowup update`:
+You can also view available plugins before installing:
 ```
-> memflow update --help
-Updates all installed packages
-
-Usage: memflowup update [OPTIONS]
-
-Options:
-      --ignore-user-index
-      --ignore-upstream-index
-      --ignore-builtin-index
-  -s, --system                 Enables system-wide installation for all users
-  -d, --dev
-  -h, --help                   Print help
+> memflowup registry ls
 ```
 
-In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:
+Or install specific plugins:
 ```
-> memflowup update -d
+> memflowup pull win32
+> memflowup pull native
+> memflowup pull qemu
 ```
 
-### 3. Verify your installation and run an example
+To see what plugins are currently installed locally:
+```
+> memflowup plugins ls
+```
+
+memflow will automatically look for plugins in the installation directories and the current working directory.
+
+Please make sure to __not__ run memflow as root (see the [note](#note) above).
+
+### 3. Building plugins from source (optional)
+
+If you prefer to build plugins from source, you can install directly from GitHub repositories:
+
+```
+> memflowup build https://github.com/memflow/memflow-coredump
+```
+
+Or build from a local folder:
+```
+> cd memflow-coredump
+> memflowup build -p .
+```
+
+### 4. Updating plugins
+
+To update all installed plugins, simply run:
+```
+> memflowup pull --all
+```
+
+You can also clean up old versions of plugins:
+```
+> memflowup plugins clean
+```
+
+### 5. Verify your installation and run an example
 
 To test if everything is working properly the easiest method is to simply
-use one of the [examples](https://github.com/memflow/memflow/tree/stable/memflow/examples) provided in memflow.
+use one of the [examples](https://github.com/memflow/memflow/tree/main/memflow/examples) provided in memflow.
 
-To run the examples simply check out the memflow repo with the appropiate version:
+To run the examples simply check out the memflow repo:
 ```
-> git clone --depth 1 --branch stable https://github.com/memflow/memflow
+> git clone https://github.com/memflow/memflow
 > cd memflow
 ```
-
-You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.
 
 And run one of the examples:
 ```
 > cargo run --example process_list -- --os native
 ```
-This examples runs the process_list example (which just lists all processes on the system) using the [`memflow-native`](https://github.com/memflow/memflow-native) plugin. This plugin simply proxies your local OS calls to memflow (as in using [process_vm_readv](https://man7.org/linux/man-pages/man2/process_vm_readv.2.html) and [process_vm_writev](https://man7.org/linux/man-pages/man2/process_vm_writev.2.html)).
+This example runs the process_list example (which just lists all processes on the system) using the [`memflow-native`](https://github.com/memflow/memflow-native) plugin. This plugin simply proxies your local OS calls to memflow (as in using [process_vm_readv](https://man7.org/linux/man-pages/man2/process_vm_readv.2.html) and [process_vm_writev](https://man7.org/linux/man-pages/man2/process_vm_writev.2.html)).
 
 If everything went well you should see a list of all open processes:
 ```
@@ -122,7 +115,6 @@ If everything went well you should see a list of all open processes:
 
 ...
 ```
-
 
 ## Windows
 
@@ -145,87 +137,90 @@ info: checking for self-update
 info: cleaning up downloads & tmp directories
 ```
 
-After setting up cargo properly you can install memflowup via cargo:
+The recommended way to install memflowup is through our automated script:
+```
+> curl --proto '=https' --tlsv1.2 -sSf https://sh.memflow.io | bash
+```
+
+Alternatively you can install memflowup via cargo:
 ```
 > cargo install memflowup --force
 ...
-Installed package `memflowup v0.1.0` (executable `memflowup.exe`)
+Installed package `memflowup v0.2.0` (executable `memflowup.exe`)
 ```
 
 ### 2. Installing plugins
 
-When running `memflowup` for the first time it is recommended to use the interactive mode and install memflow from the stable branch.
+To get started quickly, you can pull all available plugins from the default registry:
 
-Installing packages system-wide will place all plugins in `%ProgramFiles%\memflow\`.\
-Installing packages per user will place all plugins in `%UserProfile%\Documents\memflow\`.
-
-You might also want to build all packages from source for now.
-
-memflow will later automatically look in both of those directories (and the current working directory) for plugins.
 ```
-> memflowup interactive
-do you want to build packages from source? [y/N]: y 
-Running in interactive mode. You can always re-run memflowup to install additional packages, or to different paths.
-do you want to install the initial packages system-wide? [Y/n]: n
-which channel do you want to use? [stable/DEVELOPMENT]: development
-Available packages in dev channel:
-0. memflow-win32 - CorePlugin
-1. memflow-native - CorePlugin
-2. memflow-qemu - CorePlugin
-3. memflow-coredump - CorePlugin
-4. memflow-pcileech - CorePlugin
-
-Type packages to install by number, name, or type * for all:
-*
-
-...
-Initial setup done!
+> memflowup pull --all
 ```
 
-It is always possible to re-run interactive mode and redo the initial setup.
+This will download and install all memflow plugins from the registry (http://registry.memflow.io).
 
-### 2. Updating plugins
-
-To update all the installed plugins simply run `memflowup update`:
+You can also view available plugins before installing:
 ```
-> memflow update --help
-Updates all installed packages
-
-Usage: memflowup.exe update [OPTIONS]
-
-Options:
-      --ignore-user-index
-      --ignore-upstream-index
-      --ignore-builtin-index
-  -s, --system                 Enables system-wide installation for all users
-  -d, --dev
-  -h, --help                   Print help
+> memflowup registry ls
 ```
 
-In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:
+Or install specific plugins:
 ```
-> memflowup update -d
+> memflowup pull win32
+> memflowup pull native
+> memflowup pull qemu
 ```
 
-### 3. Verify your installation and run an example
+To see what plugins are currently installed locally:
+```
+> memflowup plugins ls
+```
+
+memflow will automatically look for plugins in the installation directories and the current working directory.
+
+### 3. Building plugins from source (optional)
+
+If you prefer to build plugins from source, you can install directly from GitHub repositories:
+
+```
+> memflowup build https://github.com/memflow/memflow-coredump
+```
+
+Or build from a local folder:
+```
+> cd memflow-coredump
+> memflowup build -p .
+```
+
+### 4. Updating plugins
+
+To update all installed plugins, simply run:
+```
+> memflowup pull --all
+```
+
+You can also clean up old versions of plugins:
+```
+> memflowup plugins clean
+```
+
+### 5. Verify your installation and run an example
 
 To test if everything is working properly the easiest method is to simply
-use one of the [examples](https://github.com/memflow/memflow/tree/stable/memflow/examples) provided in memflow.
+use one of the [examples](https://github.com/memflow/memflow/tree/main/memflow/examples) provided in memflow.
 
-To run the examples simply check out the memflow repo with the appropiate version:
+To run the examples simply check out the memflow repo:
 ```
-> git clone --depth 1 --branch stable https://github.com/memflow/memflow
+> git clone https://github.com/memflow/memflow
 > cd memflow
 ```
-
-You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.
 In case you are missing git you can install it from [here](https://git-scm.com/download/win).
 
 And run one of the examples:
 ```
 > cargo run --example process_list -- --os native
 ```
-This examples runs the process_list example (which just lists all processes on the system) using the [`memflow-native`](https://github.com/memflow/memflow-native) plugin. This plugin simply proxies your local OS calls to memflow (as in using [ReadProcessMemory](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory) and [WriteProcessMemory](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory)).
+This example runs the process_list example (which just lists all processes on the system) using the [`memflow-native`](https://github.com/memflow/memflow-native) plugin. This plugin simply proxies your local OS calls to memflow (as in using [ReadProcessMemory](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory) and [WriteProcessMemory](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory)).
 
 If everything went well you should see a list of all open processes:
 ```
@@ -243,3 +238,51 @@ If everything went well you should see a list of all open processes:
 
 ...
 ```
+
+## Additional Commands
+
+For more advanced usage, memflowup provides several additional commands:
+
+### Getting help
+```
+> memflowup help
+```
+
+### Managing plugins
+```
+# Remove a specific plugin
+> memflowup plugins remove coredump
+
+# List all locally installed plugins
+> memflowup plugins ls
+
+# Clean up old plugin versions
+> memflowup plugins clean
+```
+
+### Working with registries
+```
+# List all available plugins in the registry
+> memflowup registry ls
+
+# Configure a custom registry
+> memflowup config set registry http://my-registry.io
+> memflowup config set pub_key_file /home/user/key_file.pub
+```
+
+All plugins in the memflow-registry are signed and the signature is checked by memflowup during the download process. Using a custom registry requires setting up the appropriate public key that was used for signing the files in the registry.
+
+## Troubleshooting
+
+### Mac OS Issues
+If you are using Mac OS and encounter an error building proc-macro2, run:
+```
+> xcode-select --install
+```
+
+### Migrating from memflowup 0.1
+If you're upgrading from an older version of memflowup:
+1. Delete all system-wide installed plugins in `/usr/lib/memflow`
+2. Delete all installed plugins for the current user in `~/.local/lib/memflow`
+3. Delete the `/etc/memflowup` folder
+4. Reinstall all plugins via `memflowup pull --all`
