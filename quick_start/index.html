@@ -60,72 +60,57 @@ cargo 1.74.1 (ecb9851af 2023-10-18)
 
 <span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">downloads</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="n">directories</span>
 </pre></div>
-<p>After setting up cargo properly you can install memflowup via our install script:</p>
-<div class="highlight"><pre><span></span>&gt; curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.memflow.io | bash
-</pre></div>
-<p>Alternatively you can install memflowup via cargo:</p>
-<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span>
-<span class="o">...</span>
-<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
+<p>On Windows, install memflowup via cargo:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">cargo</span><span class="w"> </span><span class="k">install</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="o">--</span><span class="k">force</span>
+<span class="p">...</span>
+<span class="n">Installed</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n n-Quoted">`memflowup v0.2.0`</span><span class="w"> </span><span class="p">(</span><span class="n">executable</span><span class="w"> </span><span class="n n-Quoted">`memflowup`</span><span class="p">)</span>
 </pre></div>
 <h4>Note</h4>
 <p>memflowup should <strong>not</strong> be installed or ran as root or via sudo. By default rust installs cargo and all binaries installed via cargo on a per-user basis. This means running the installation as root will result in memflowup being placed in <code>/root/</code> (because it is the root user's home directory) and will also only be accessible from the root user.</p>
 <h3>2. Installing plugins</h3>
-<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the stable branch.</p>
-<p>Installing packages system-wide will place all plugins in <code>/usr/local/lib/memflow</code>.<br />
-Installing packages per user will place all plugins in <code>$HOME/.local/lib/memflow</code>.</p>
-<p>You might also want to build all packages from source for now.</p>
-<p>memflow will later automatically look in both of those directories (and the current working directory) for plugins.</p>
-<p>Please make sure to <strong>not</strong> run memflow as root (see the <a href="#note">note</a> above)</p>
-<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">interactive</span>
-<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">source</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">y</span><span class="o">/</span><span class="nx">N</span><span class="p">]:</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span>
-<span class="nx">Running</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">interactive</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">re</span><span class="o">-</span><span class="nx">run</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">packages</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">paths</span><span class="p">.</span>
-<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">initial</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">system</span><span class="o">-</span><span class="nx">wide</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">Y</span><span class="o">/</span><span class="nx">n</span><span class="p">]:</span><span class="w"> </span><span class="nx">n</span>
-<span class="nx">which</span><span class="w"> </span><span class="nx">channel</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">stable</span><span class="o">/</span><span class="nx">DEVELOPMENT</span><span class="p">]:</span><span class="w"> </span><span class="nx">development</span>
-<span class="nx">Available</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">channel</span><span class="p">:</span>
-<span class="mi">0</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">win32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">native</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">qemu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">coredump</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">4</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">pcileech</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-
-<span class="nx">Type</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">all</span><span class="p">:</span>
-<span class="o">*</span>
-
-<span class="o">...</span>
-<span class="nx">Initial</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="nx">done</span><span class="p">!</span>
+<p>To get started quickly, you can pull all available plugins from the default registry:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull --all
 </pre></div>
-<p>It is always possible to re-run interactive mode and redo the initial setup.</p>
-<h3>2. Updating plugins</h3>
-<p>To update all the installed plugins simply run <code>memflowup update</code>:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflow</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">--</span><span class="n">help</span>
-<span class="n">Updates</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">packages</span>
-
-<span class="k">Usage</span><span class="err">:</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">[</span><span class="n">OPTIONS</span><span class="o">]</span>
-
-<span class="nl">Options</span><span class="p">:</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="k">user</span><span class="o">-</span><span class="k">index</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="k">index</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">builtin</span><span class="o">-</span><span class="k">index</span>
-<span class="w">  </span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="k">system</span><span class="w">                 </span><span class="n">Enables</span><span class="w"> </span><span class="k">system</span><span class="o">-</span><span class="n">wide</span><span class="w"> </span><span class="n">installation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">users</span>
-<span class="w">  </span><span class="o">-</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="n">dev</span>
-<span class="w">  </span><span class="o">-</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="c1">--help                   Print help</span>
+<p>This will download and install all memflow plugins from the registry (http://registry.memflow.io).</p>
+<p>You can also view available plugins before installing:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="n">registry</span><span class="w"> </span><span class="n">ls</span>
 </pre></div>
-<p>In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:</p>
-<div class="highlight"><pre><span></span>&gt; memflowup update -d
+<p>Or install specific plugins:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull win32
+&gt; memflowup pull native
+&gt; memflowup pull qemu
 </pre></div>
-<h3>3. Verify your installation and run an example</h3>
+<p>To see what plugins are currently installed locally:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup plugins ls
+</pre></div>
+<p>memflow will automatically look for plugins in the installation directories and the current working directory.</p>
+<p>Please make sure to <strong>not</strong> run memflow as root (see the <a href="#note">note</a> above).</p>
+<h3>3. Building plugins from source (optional)</h3>
+<p>If you prefer to build plugins from source, you can install directly from GitHub repositories:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup build https://github.com/memflow/memflow-coredump
+</pre></div>
+<p>Or build from a local folder:</p>
+<div class="highlight"><pre><span></span>&gt; cd memflow-coredump
+&gt; memflowup build -p .
+</pre></div>
+<h3>4. Updating plugins</h3>
+<p>To update all installed plugins, simply run:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull --all
+</pre></div>
+<p>You can also clean up old versions of plugins:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup plugins clean
+</pre></div>
+<h3>5. Verify your installation and run an example</h3>
 <p>To test if everything is working properly the easiest method is to simply
-use one of the <a href="https://github.com/memflow/memflow/tree/stable/memflow/examples">examples</a> provided in memflow.</p>
-<p>To run the examples simply check out the memflow repo with the appropiate version:</p>
-<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch stable https://github.com/memflow/memflow
+use one of the <a href="https://github.com/memflow/memflow/tree/main/memflow/examples">examples</a> provided in memflow.</p>
+<p>To run the examples simply check out the memflow repo:</p>
+<div class="highlight"><pre><span></span>&gt; git clone https://github.com/memflow/memflow
 &gt; cd memflow
 </pre></div>
-<p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.</p>
 <p>And run one of the examples:</p>
 <div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
 </pre></div>
-<p>This examples runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://man7.org/linux/man-pages/man2/process_vm_readv.2.html">process_vm_readv</a> and <a href="https://man7.org/linux/man-pages/man2/process_vm_writev.2.html">process_vm_writev</a>).</p>
+<p>This example runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://man7.org/linux/man-pages/man2/process_vm_readv.2.html">process_vm_readv</a> and <a href="https://man7.org/linux/man-pages/man2/process_vm_writev.2.html">process_vm_writev</a>).</p>
 <p>If everything went well you should see a list of all open processes:</p>
 <div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
   PID   SYS ARCH  PROC ARCH NAME
@@ -149,67 +134,58 @@ cargo 1.74.1 (ecb9851af 2023-10-18)
 
 <span class="n">info</span><span class="p">:</span><span class="w"> </span><span class="n">cleaning</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">downloads</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="n">directories</span>
 </pre></div>
-<p>After setting up cargo properly you can install memflowup via cargo:</p>
+<p>The recommended way to install memflowup is through our automated script:</p>
+<div class="highlight"><pre><span></span>&gt; curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.memflow.io | bash
+</pre></div>
+<p>Alternatively you can install memflowup via cargo:</p>
 <div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">cargo</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="o">--</span><span class="nx">force</span>
 <span class="o">...</span>
-<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.1.0</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
+<span class="nx">Installed</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">v0</span><span class="m m-Double">.2.0</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="nx">executable</span><span class="w"> </span><span class="err">`</span><span class="nx">memflowup</span><span class="p">.</span><span class="nx">exe</span><span class="err">`</span><span class="p">)</span>
 </pre></div>
 <h3>2. Installing plugins</h3>
-<p>When running <code>memflowup</code> for the first time it is recommended to use the interactive mode and install memflow from the stable branch.</p>
-<p>Installing packages system-wide will place all plugins in <code>%ProgramFiles%\memflow\</code>.<br />
-Installing packages per user will place all plugins in <code>%UserProfile%\Documents\memflow\</code>.</p>
-<p>You might also want to build all packages from source for now.</p>
-<p>memflow will later automatically look in both of those directories (and the current working directory) for plugins.</p>
-<div class="highlight"><pre><span></span><span class="p">&gt;</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">interactive</span>
-<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">source</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">y</span><span class="o">/</span><span class="nx">N</span><span class="p">]:</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span>
-<span class="nx">Running</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">interactive</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">re</span><span class="o">-</span><span class="nx">run</span><span class="w"> </span><span class="nx">memflowup</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">packages</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">paths</span><span class="p">.</span>
-<span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">initial</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">system</span><span class="o">-</span><span class="nx">wide</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">Y</span><span class="o">/</span><span class="nx">n</span><span class="p">]:</span><span class="w"> </span><span class="nx">n</span>
-<span class="nx">which</span><span class="w"> </span><span class="nx">channel</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">want</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="p">?</span><span class="w"> </span><span class="p">[</span><span class="nx">stable</span><span class="o">/</span><span class="nx">DEVELOPMENT</span><span class="p">]:</span><span class="w"> </span><span class="nx">development</span>
-<span class="nx">Available</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">channel</span><span class="p">:</span>
-<span class="mi">0</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">win32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">native</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">qemu</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">coredump</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-<span class="mi">4</span><span class="p">.</span><span class="w"> </span><span class="nx">memflow</span><span class="o">-</span><span class="nx">pcileech</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">CorePlugin</span>
-
-<span class="nx">Type</span><span class="w"> </span><span class="nx">packages</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">all</span><span class="p">:</span>
-<span class="o">*</span>
-
-<span class="o">...</span>
-<span class="nx">Initial</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="nx">done</span><span class="p">!</span>
+<p>To get started quickly, you can pull all available plugins from the default registry:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull --all
 </pre></div>
-<p>It is always possible to re-run interactive mode and redo the initial setup.</p>
-<h3>2. Updating plugins</h3>
-<p>To update all the installed plugins simply run <code>memflowup update</code>:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflow</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">--</span><span class="n">help</span>
-<span class="n">Updates</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">packages</span>
-
-<span class="k">Usage</span><span class="err">:</span><span class="w"> </span><span class="n">memflowup</span><span class="p">.</span><span class="n">exe</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="o">[</span><span class="n">OPTIONS</span><span class="o">]</span>
-
-<span class="nl">Options</span><span class="p">:</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="k">user</span><span class="o">-</span><span class="k">index</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">upstream</span><span class="o">-</span><span class="k">index</span>
-<span class="w">      </span><span class="o">--</span><span class="k">ignore</span><span class="o">-</span><span class="n">builtin</span><span class="o">-</span><span class="k">index</span>
-<span class="w">  </span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="k">system</span><span class="w">                 </span><span class="n">Enables</span><span class="w"> </span><span class="k">system</span><span class="o">-</span><span class="n">wide</span><span class="w"> </span><span class="n">installation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">users</span>
-<span class="w">  </span><span class="o">-</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="o">--</span><span class="n">dev</span>
-<span class="w">  </span><span class="o">-</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="c1">--help                   Print help</span>
+<p>This will download and install all memflow plugins from the registry (http://registry.memflow.io).</p>
+<p>You can also view available plugins before installing:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="n">registry</span><span class="w"> </span><span class="n">ls</span>
 </pre></div>
-<p>In case you installed the plugins like in the example above you can simply use the development branch and install them non system-wide:</p>
-<div class="highlight"><pre><span></span>&gt; memflowup update -d
+<p>Or install specific plugins:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull win32
+&gt; memflowup pull native
+&gt; memflowup pull qemu
 </pre></div>
-<h3>3. Verify your installation and run an example</h3>
+<p>To see what plugins are currently installed locally:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup plugins ls
+</pre></div>
+<p>memflow will automatically look for plugins in the installation directories and the current working directory.</p>
+<h3>3. Building plugins from source (optional)</h3>
+<p>If you prefer to build plugins from source, you can install directly from GitHub repositories:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup build https://github.com/memflow/memflow-coredump
+</pre></div>
+<p>Or build from a local folder:</p>
+<div class="highlight"><pre><span></span>&gt; cd memflow-coredump
+&gt; memflowup build -p .
+</pre></div>
+<h3>4. Updating plugins</h3>
+<p>To update all installed plugins, simply run:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup pull --all
+</pre></div>
+<p>You can also clean up old versions of plugins:</p>
+<div class="highlight"><pre><span></span>&gt; memflowup plugins clean
+</pre></div>
+<h3>5. Verify your installation and run an example</h3>
 <p>To test if everything is working properly the easiest method is to simply
-use one of the <a href="https://github.com/memflow/memflow/tree/stable/memflow/examples">examples</a> provided in memflow.</p>
-<p>To run the examples simply check out the memflow repo with the appropiate version:</p>
-<div class="highlight"><pre><span></span>&gt; git clone --depth 1 --branch stable https://github.com/memflow/memflow
+use one of the <a href="https://github.com/memflow/memflow/tree/main/memflow/examples">examples</a> provided in memflow.</p>
+<p>To run the examples simply check out the memflow repo:</p>
+<div class="highlight"><pre><span></span>&gt; git clone https://github.com/memflow/memflow
 &gt; cd memflow
 </pre></div>
-<p>You can safely ignore the warning about the 'detached HEAD' state. This happens because we are checking out a specific tag in the memflow repo.
-In case you are missing git you can install it from <a href="https://git-scm.com/download/win">here</a>.</p>
+<p>In case you are missing git you can install it from <a href="https://git-scm.com/download/win">here</a>.</p>
 <p>And run one of the examples:</p>
 <div class="highlight"><pre><span></span><span class="k">&gt; </span><span class="ge">cargo run --example process_list -- --os native</span>
 </pre></div>
-<p>This examples runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory">ReadProcessMemory</a> and <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory">WriteProcessMemory</a>).</p>
+<p>This example runs the process_list example (which just lists all processes on the system) using the <a href="https://github.com/memflow/memflow-native"><code>memflow-native</code></a> plugin. This plugin simply proxies your local OS calls to memflow (as in using <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory">ReadProcessMemory</a> and <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory">WriteProcessMemory</a>).</p>
 <p>If everything went well you should see a list of all open processes:</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="n">cargo</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">example</span><span class="w"> </span><span class="n">process_list</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="n">os</span><span class="w"> </span><span class="n">native</span>
 <span class="w">  </span><span class="n">PID</span><span class="w">   </span><span class="n">SYS</span><span class="w"> </span><span class="n">ARCH</span><span class="w">  </span><span class="n">PROC</span><span class="w"> </span><span class="n">ARCH</span><span class="w"> </span><span class="n">NAME</span>
@@ -225,6 +201,43 @@ In case you are missing git you can install it from <a href="https://git-scm.com
 
 <span class="p">...</span>
 </pre></div>
+<h2>Additional Commands</h2>
+<p>For more advanced usage, memflowup provides several additional commands:</p>
+<h3>Getting help</h3>
+<div class="highlight"><pre><span></span>&gt; memflowup help
+</pre></div>
+<h3>Managing plugins</h3>
+<div class="highlight"><pre><span></span># Remove a specific plugin
+&gt; memflowup plugins remove coredump
+
+# List all locally installed plugins
+&gt; memflowup plugins ls
+
+# Clean up old plugin versions
+&gt; memflowup plugins clean
+</pre></div>
+<h3>Working with registries</h3>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="n">plugins</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">registry</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="n">registry</span><span class="w"> </span><span class="n">ls</span>
+
+<span class="p">#</span><span class="w"> </span><span class="n">Configure</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">registry</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">registry</span><span class="w"> </span><span class="nl">http:</span><span class="c1">//my-registry.io</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">memflowup</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">pub_key_file</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">key_file</span><span class="p">.</span><span class="n">pub</span>
+</pre></div>
+<p>All plugins in the memflow-registry are signed and the signature is checked by memflowup during the download process. Using a custom registry requires setting up the appropriate public key that was used for signing the files in the registry.</p>
+<h2>Troubleshooting</h2>
+<h3>Mac OS Issues</h3>
+<p>If you are using Mac OS and encounter an error building proc-macro2, run:</p>
+<div class="highlight"><pre><span></span>&gt; xcode-select --install
+</pre></div>
+<h3>Migrating from memflowup 0.1</h3>
+<p>If you're upgrading from an older version of memflowup:</p>
+<ol>
+<li>Delete all system-wide installed plugins in <code>/usr/lib/memflow</code></li>
+<li>Delete all installed plugins for the current user in <code>~/.local/lib/memflow</code></li>
+<li>Delete the <code>/etc/memflowup</code> folder</li>
+<li>Reinstall all plugins via <code>memflowup pull --all</code></li>
+</ol>
 
             </div>
         </div>
